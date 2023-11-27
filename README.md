@@ -1,16 +1,6 @@
-# post_and_comment
+글리스트 조회 및 글 상세정보 출력 기능 개발
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [x] 글리스트 조회 기능
+- [x] 글 상세정보 출력 기능
+  - [x] 댓글 리스트 출력 기능
+  - [x] 대댓글 리스트 출력 기능
