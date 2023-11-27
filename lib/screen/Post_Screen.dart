@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:post_and_comment/screen/Post_Detail.dart';
-import 'package:post_and_comment/screen/JsonData.dart';
-import 'dart:convert';
+import 'package:post_and_comment/screen/Post_Detail_Screen.dart';
 
 class PostScreen extends StatefulWidget {
   const PostScreen({super.key});
@@ -13,50 +11,52 @@ class PostScreen extends StatefulWidget {
 class _PostScreenState extends State<PostScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.blue,
-        title: Text(
-          '자유게시판',
-          style: TextStyle(
-            color: Colors.white,
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: Colors.blue,
+          title: Text(
+            '자유게시판',
+            style: TextStyle(
+              color: Colors.white,
+            ),
           ),
         ),
-      ),
-      body: ListView.builder(
-        itemCount: JsonData.length,
-        itemBuilder: (context, index) {
-          final postData = JsonData[index];
-          return Card(
-            margin: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-            elevation: 3,
-            child: ListTile(
-              contentPadding: EdgeInsets.all(16),
-              title: Text(
-                postData['post_title'],
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                ),
-              ),
-              subtitle: Text(
-                postData['post_content'],
-                style: TextStyle(
-                  fontSize: 14,
-                ),
-              ),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => PostDetailScreen(postData: postData),
+        body: ListView.builder(
+          itemCount: JsonData.length,
+          itemBuilder: (context, index) {
+            final postData = JsonData[index];
+            return Card(
+              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              elevation: 3,
+              child: ListTile(
+                contentPadding: EdgeInsets.all(16),
+                title: Text(
+                  postData['post_title'],
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
                   ),
-                );
-              },
-            ),
-          );
-        },
+                ),
+                subtitle: Text(
+                  postData['post_content'],
+                  style: TextStyle(
+                    fontSize: 14,
+                  ),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PostDetailScreen(postData: postData),
+                    ),
+                  );
+                },
+              ),
+            );
+          },
+        ),
       ),
     );
   }

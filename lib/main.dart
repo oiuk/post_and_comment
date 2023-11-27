@@ -6,6 +6,7 @@ void main() {
     MaterialApp(
       debugShowCheckedModeBanner: false,
       home: PostScreen(),
+      fdsa
     ),
   );
 }

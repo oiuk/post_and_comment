@@ -1,12 +1,9 @@
-import 'package:flutter/cupertino.dart';
-import 'Post_Screen.dart';
-
 class Post {
-  int postId;
-  String postTitle;
-  String postContent;
-  String authorName;
-  List<Comment> commentList;
+  final int postId;
+  final String postTitle;
+  final String postContent;
+  final String authorName;
+  final List<Comment> commentList;
 
   Post({
     required this.postId,
@@ -17,11 +14,10 @@ class Post {
   });
 
   factory Post.fromJson(Map<String, dynamic> json) {
-    List<Comment> comments = [];
-    if (json['comment_list'] != null) {
-      var commentList = json['comment_list'] as List;
-      comments = commentList.map((comment) => Comment.fromJson(comment)).toList();
-    }
+    List<Comment> comments = (json['comment_list'] as List)
+        .map((comment) => Comment.fromJson(comment))
+        .toList();
+
     return Post(
       postId: json['post_id'],
       postTitle: json['post_title'],
@@ -31,33 +27,33 @@ class Post {
     );
   }
 }
+
 class Comment {
-  int commentId;
+  final int commentId;
   final String commentContent;
   final String authorName;
   final int? parentId;
-  final List<Comment> replies;
+  final List<Comment>? replies; // replies를 선택적(optional)으로 수정
 
   Comment({
     required this.commentId,
     required this.commentContent,
     required this.authorName,
     this.parentId,
-    required this.replies,
+    this.replies, // 선택적(optional)으로 변경
   });
 
   factory Comment.fromJson(Map<String, dynamic> json) {
-    List<Comment> replies = [];
-    if (json['replies'] != null) {
-      var repliesList = json['replies'] as List;
-      replies = repliesList.map((reply) => Comment.fromJson(reply)).toList();
-    }
+    List<Comment>? replyList = (json['replies'] as List<dynamic>?)
+        ?.map((reply) => Comment.fromJson(reply))
+        .toList();
+
     return Comment(
       commentId: json['comment_id'],
       commentContent: json['comment_content'],
       authorName: json['author_name'],
       parentId: json['parent_id'],
-      replies: replies,
+      replies: replyList,
     );
   }
 }
