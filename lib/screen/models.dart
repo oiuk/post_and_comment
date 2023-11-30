@@ -33,27 +33,30 @@ class Comment {
   final String commentContent;
   final String authorName;
   final int? parentId;
-  final List<Comment>? replies; // replies를 선택적(optional)으로 수정
+  List<Comment> replies;
 
   Comment({
     required this.commentId,
     required this.commentContent,
     required this.authorName,
     this.parentId,
-    this.replies, // 선택적(optional)으로 변경
+    required this.replies,
   });
 
   factory Comment.fromJson(Map<String, dynamic> json) {
-    List<Comment>? replyList = (json['replies'] as List<dynamic>?)
-        ?.map((reply) => Comment.fromJson(reply))
-        .toList();
+    List<Comment> replyList = [];
+    if (json['replies'] != null) {
+      replyList = (json['replies'] as List).map((reply) => Comment.fromJson(reply)).toList();
+    }
 
     return Comment(
-      commentId: json['comment_id'],
-      commentContent: json['comment_content'],
-      authorName: json['author_name'],
+      commentId: json['comment_id'] ?? 0,
+      commentContent: json['comment_content'] ?? '',
+      authorName: json['author_name'] ?? '',
       parentId: json['parent_id'],
       replies: replyList,
     );
   }
 }
+
+
