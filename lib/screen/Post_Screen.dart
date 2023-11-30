@@ -20,8 +20,15 @@ class _PostScreenState extends State<PostScreen> {
             '자유게시판',
             style: TextStyle(
               color: Colors.white,
+              fontWeight: FontWeight.bold,
             ),
           ),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.create, color: Colors.white),
+              onPressed: () {},
+            )
+          ],
         ),
         body: ListView.builder(
           itemCount: JsonData.length,
@@ -39,17 +46,21 @@ class _PostScreenState extends State<PostScreen> {
                     fontSize: 18,
                   ),
                 ),
-                subtitle: Text(
-                  postData['post_content'],
-                  style: TextStyle(
-                    fontSize: 14,
+                subtitle: Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Text(
+                    postData['post_content'],
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
                   ),
                 ),
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => PostDetailScreen(postData: postData),
+                      builder: (context) =>
+                          PostDetailScreen(postData: postData),
                     ),
                   );
                 },
